@@ -35,7 +35,17 @@ export default function App() {
       description: "Production RAG chatbot supporting 6+ languages with proprietary tri-source retrieval system. Achieved 86% top-1 relevance and reduced mean time-to-answer from ~96 hours to <10 minutes.",
       metrics: ["~1k concurrent sessions", "~200 QPS", "<300ms retrieval latency", "0.72 MRR"],
       tech: ["RAG", "FAISS", "Milvus", "Multilingual NLP"],
-      date: "Sep 2025"
+      date: "Sep 2025",
+      link:'https://github.com/Meridion-Labs/orin-langchain'
+    },
+    {
+      title: "Product-Price-Regressor",
+      subtitle: "Product Price Prediction System",
+      description: "Designed and iteratively fine-tuned a DeBERTa-v3-base regression model over 30 epochs (15+7+8) on a 75,000-sample dataset for price prediction, ultimately achieving a final best validation metric of SMAPE 21.73% (down from initial 63.17%)",
+      metrics: ["75,000 dataset samples", "30 training epochs", "SMAPE 21.73%", "DeBERTa-v3-base"],
+      tech: ["DeBERTa", "Transformers", "Regression Analysis", "Data Preprocessing"],
+      date: "Oct 2025",
+      link:'https://github.com/SahilChambyal/Product-Price-Regressor'
     },
     {
       title: "Meridian",
@@ -43,7 +53,8 @@ export default function App() {
       description: "Model-agnostic token pipeline with universal tokenizer middleware and real-time metering. Achieved 99.99% accounting accuracy and 28% API spend reduction.",
       metrics: ["~800 concurrent agents", "2.4M tokens/day", "35ms median latency", "28% cost reduction"],
       tech: ["Token Management", "Real-time Analytics", "Anomaly Detection"],
-      date: "Aug 2025"
+      date: "Aug 2025",
+      link:'https://github.com/Meridion-Labs/metered-token-pipeline'
     },
     {
       title: "NLP Content Analyzer",
@@ -51,7 +62,8 @@ export default function App() {
       description: "End-to-end text analysis pipeline that scrapes and analyzes articles across 20+ linguistic and sentiment metrics. Processed 500+ articles with 95% accuracy.",
       metrics: ["500+ articles analyzed", "95% scraping accuracy", "20+ parameters", "Automated profiling"],
       tech: ["NLTK", "Web Scraping", "Sentiment Analysis", "Content Intelligence"],
-      date: "Mar 2025"
+      date: "Mar 2025",
+      link:'https://github.com/SahilChambyal/NLP_text_analysis_web-scrapping'
     }
   ];
 
@@ -464,7 +476,7 @@ export default function App() {
                               variant="outline" 
                               size="lg"
                               className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white/60 rounded-full backdrop-blur-sm group transition-all duration-300 px-6 py-3 text-base font-medium min-w-fit" 
-                              onClick={() => window.open('https://github.com/sahilchambyal', '_blank')}
+                              onClick={() => window.open(project.link, '_blank')}
                             >
                               <ExternalLink className="h-5 w-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
                               Visit Project
