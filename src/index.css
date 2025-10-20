@@ -2141,3 +2141,8 @@ html {
   inherits: false;
   initial-value: 0 0 #0000;
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

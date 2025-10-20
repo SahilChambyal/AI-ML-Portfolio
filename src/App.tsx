@@ -107,10 +107,13 @@ export default function App() {
           
           <div className="hidden md:flex items-center space-x-12">
             {['About', 'Projects', 'Skills', 'Education'].map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item}
-                href={`#${item.toLowerCase()}`}
-                className="relative text-white/70 hover:text-white transition-colors duration-500"
+                onClick={() => {
+                  const element = document.getElementById(item.toLowerCase());
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="relative text-white/70 hover:text-white transition-colors duration-500 bg-none border-none cursor-pointer"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
@@ -125,7 +128,7 @@ export default function App() {
                   whileHover={{ width: "100%" }}
                   transition={{ duration: 0.3 }}
                 />
-              </motion.a>
+              </motion.button>
             ))}
           </div>
           
@@ -437,69 +440,77 @@ export default function App() {
               >
                 <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-700 rounded-3xl overflow-hidden">
                   <div className="p-12">
-                    <div className="grid lg:grid-cols-3 gap-12">
-                      <div className="lg:col-span-2">
-                        <div className="flex items-center gap-4 mb-6">
-                          <motion.h3 
-                            className="text-3xl font-normal text-white tracking-tight"
-                            whileHover={{ x: 5, transition: { duration: 0.3 } }}
-                          >
-                            {project.title}
-                          </motion.h3>
-                          <Badge variant="outline" className="border-white/40 text-white bg-white/10 rounded-full px-3 py-1">
-                            {project.date}
-                          </Badge>
-                        </div>
-                        <h4 className="text-xl text-white/80 mb-6 font-light">{project.subtitle}</h4>
-                        <p className="text-white/80 mb-8 leading-relaxed text-lg">{project.description}</p>
-                        
-                        <div className="flex justify-between items-start gap-8">
-                          <div className="flex flex-wrap gap-3">
-                            {project.tech.map((tech, techIndex) => (
-                              <motion.div
-                                key={techIndex}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                <Badge 
-                                  variant="secondary" 
-                                  className="bg-white/10 text-white border-0 rounded-full px-4 py-2 backdrop-blur-sm"
-                                >
-                                  {tech}
-                                </Badge>
-                              </motion.div>
-                            ))}
-                          </div>
-                          
-                          <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }}>
-                            <Button 
-                              variant="outline" 
-                              size="lg"
-                              className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white/60 rounded-full backdrop-blur-sm group transition-all duration-300 px-6 py-3 text-base font-medium min-w-fit" 
-                              onClick={() => window.open(project.link, '_blank')}
+                    <div className="w-full">
+                      {/* Header with Title and Date */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                        <motion.h3 
+                          className="text-3xl font-normal text-white tracking-tight"
+                          whileHover={{ x: 5, transition: { duration: 0.3 } }}
+                        >
+                          {project.title}
+                        </motion.h3>
+                        <Badge variant="outline" className="border-white/40 text-white bg-white/10 rounded-full px-3 py-1 w-fit">
+                          {project.date}
+                        </Badge>
+                      </div>
+                      
+                      {/* Subtitle and Description */}
+                      <h4 className="text-xl text-white/80 mb-6 font-light">{project.subtitle}</h4>
+                      <p className="text-white/80 mb-8 leading-relaxed text-lg">{project.description}</p>
+                      
+                      {/* Tech Tags */}
+                      <div className="mb-8">
+                        <div className="flex flex-wrap gap-3">
+                          {project.tech.map((tech, techIndex) => (
+                            <motion.div
+                              key={techIndex}
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              transition={{ duration: 0.2 }}
                             >
-                              <ExternalLink className="h-5 w-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                              Visit Project
-                            </Button>
-                          </motion.div>
+                              <Badge 
+                                variant="secondary" 
+                                className="bg-white/10 text-white border-0 rounded-full px-4 py-2 backdrop-blur-sm"
+                              >
+                                {tech}
+                              </Badge>
+                            </motion.div>
+                          ))}
                         </div>
                       </div>
                       
-                      <div className="space-y-4">
-                        <h5 className="font-normal text-white mb-6 text-lg">Key Metrics</h5>
-                        {project.metrics.map((metric, metricIndex) => (
-                          <motion.div 
-                            key={metricIndex} 
-                            className="flex items-start gap-3 text-white/80"
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: metricIndex * 0.1, duration: 0.5 }}
-                            viewport={{ once: true }}
+                      {/* Visit Button */}
+                      <div className="mb-12">
+                        <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }} className="w-fit">
+                          <Button 
+                            variant="outline" 
+                            size="lg"
+                            className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white/60 rounded-full backdrop-blur-sm group transition-all duration-300 px-6 py-3 text-base font-medium" 
+                            onClick={() => window.open(project.link, '_blank')}
                           >
-                            <div className="w-1.5 h-1.5 bg-white/60 rounded-full mt-2 flex-shrink-0" />
-                            <span className="leading-relaxed">{metric}</span>
-                          </motion.div>
-                        ))}
+                            <ExternalLink className="h-5 w-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
+                            Visit Project
+                          </Button>
+                        </motion.div>
+                      </div>
+                      
+                      {/* Key Metrics */}
+                      <div className="border-t border-white/10 pt-8">
+                        <h5 className="font-normal text-white mb-6 text-lg">Key Metrics</h5>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          {project.metrics.map((metric, metricIndex) => (
+                            <motion.div 
+                              key={metricIndex} 
+                              className="flex items-start gap-3 text-white/80"
+                              initial={{ opacity: 0, x: 20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: metricIndex * 0.1, duration: 0.5 }}
+                              viewport={{ once: true }}
+                            >
+                              <div className="w-1.5 h-1.5 bg-white/60 rounded-full mt-2 flex-shrink-0" />
+                              <span className="leading-relaxed">{metric}</span>
+                            </motion.div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
