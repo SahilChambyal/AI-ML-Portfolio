@@ -4,6 +4,7 @@ import { Badge } from './components/ui/badge';
 import { Card } from './components/ui/card';
 import { Github, Linkedin, Mail, ExternalLink, ArrowUpRight, ArrowDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import sahilPhoto from 'figma:asset/bb9020aa65b21668c8e338cd68f379a64ca06b58.png';
 
 export default function App() {
@@ -731,6 +732,7 @@ export default function App() {
           </motion.p>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
