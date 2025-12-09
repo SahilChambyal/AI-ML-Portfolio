@@ -101,13 +101,6 @@ export default function App() {
             >
               Sahil Chambyal
             </motion.div>
-            <Button
-              variant="outline"
-              className="border-blue-400/50 text-blue-300 bg-blue-400/10 hover:bg-blue-400/20 transition-colors duration-300 rounded-full"
-              onClick={() => window.open('https://drive.google.com/file/d/1mmy36mrlAOaq2GcKn0oVPXgrULFi7Chp/view?usp=sharing', '_blank')}
-            >
-              Resume
-            </Button>
           </div>
           
           <div className="hidden md:flex items-center space-x-12">
@@ -137,23 +130,32 @@ export default function App() {
             ))}
           </div>
           
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            whileHover={{ 
-              scale: 1.05,
-              transition: { duration: 0.3 }
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              className="bg-white text-black hover:bg-gray-100 rounded-full px-8 py-2 font-normal tracking-wide transition-all duration-300"
-              onClick={() => window.open('https://www.linkedin.com/in/sahil-chambyal07/')}
+          <div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              className="border-blue-400/50 text-blue-300 bg-blue-400/10 hover:bg-blue-400/20 transition-colors duration-300 rounded-full"
+              onClick={() => window.open('https://drive.google.com/file/d/1mmy36mrlAOaq2GcKn0oVPXgrULFi7Chp/view?usp=sharing', '_blank')}
             >
-              Connect
+              Resume
             </Button>
-          </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                className="bg-white text-black hover:bg-gray-100 rounded-full px-8 py-2 font-normal tracking-wide transition-all duration-300"
+                onClick={() => window.open('https://www.linkedin.com/in/sahil-chambyal07/')}
+              >
+                Connect
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </motion.nav>
 
