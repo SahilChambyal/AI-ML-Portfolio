@@ -3,7 +3,7 @@
 export const LINKS = {
   github: "https://github.com/sahilchambyal",
   linkedin: "https://www.linkedin.com/in/sahil-chambyal07/",
-  resume: "https://drive.google.com/file/d/1mmy36mrlAOaq2GcKn0oVPXgrULFi7Chp/view?usp=sharing",
+  resume: "https://drive.google.com/file/d/1sXRLqM8Omkx7zLT1VVy6nVtPu2lyPzQb/view?usp=sharing",
   email: "mailto:sahil.chambyal@outlook.com",
 };
 
