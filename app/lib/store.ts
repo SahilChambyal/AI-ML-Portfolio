@@ -43,6 +43,25 @@ interface AppState {
 
   quality: QualityTier;
   setQuality: (q: QualityTier) => void;
+
+  // --- Game State ---
+  gameActive: boolean;
+  setGameActive: (active: boolean) => void;
+
+  gameScore: number;
+  setGameScore: (score: number | ((s: number) => number)) => void;
+
+  gameShield: number;
+  setGameShield: (shield: number | ((s: number) => number)) => void;
+
+  gameCollectibles: number;
+  setGameCollectibles: (c: number | ((s: number) => number)) => void;
+
+  highScore: number;
+  setHighScore: (score: number) => void;
+  loadHighScore: () => void;
+
+  resetGame: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -66,4 +85,39 @@ export const useAppStore = create<AppState>((set) => ({
 
   quality: "high",
   setQuality: (quality) => set({ quality }),
+
+  // --- Game Store Implementation ---
+  gameActive: false,
+  setGameActive: (gameActive) => set({ gameActive }),
+
+  gameScore: 0,
+  setGameScore: (score) => set((s) => ({
+    gameScore: typeof score === "function" ? score(s.gameScore) : score
+  })),
+
+  gameShield: 100,
+  setGameShield: (shield) => set((s) => ({
+    gameShield: Math.max(0, Math.min(100, typeof shield === "function" ? shield(s.gameShield) : shield))
+  })),
+
+  gameCollectibles: 0,
+  setGameCollectibles: (c) => set((s) => ({
+    gameCollectibles: typeof c === "function" ? c(s.gameCollectibles) : c
+  })),
+
+  highScore: 0,
+  setHighScore: (highScore) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("nf-highscore", String(highScore));
+    }
+    set({ highScore });
+  },
+  loadHighScore: () => {
+    if (typeof window !== "undefined") {
+      const hs = Number(localStorage.getItem("nf-highscore") || 0);
+      set({ highScore: hs });
+    }
+  },
+
+  resetGame: () => set({ gameScore: 0, gameShield: 100, gameCollectibles: 0 }),
 }));

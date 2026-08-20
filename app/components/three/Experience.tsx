@@ -9,6 +9,7 @@ import { ProjectMonuments } from "./ProjectMonuments";
 import { SkillConstellation } from "./SkillConstellation";
 import { ArchiveRings } from "./ArchiveRings";
 import { GridFloor } from "./GridFloor";
+import { GameScene } from "./GameScene";
 import { useAppStore } from "../../lib/store";
 
 /**
@@ -18,6 +19,7 @@ import { useAppStore } from "../../lib/store";
  */
 export function Experience() {
   const quality = useAppStore((s) => s.quality);
+  const gameActive = useAppStore((s) => s.gameActive);
 
   useFrame((_, delta) => {
     tickPalette(delta);
@@ -33,21 +35,30 @@ export function Experience() {
           seasoning, not sauce: just enough to tint edges. The color is
           assigned by reference via ref (a JSX color prop would copy the
           value once and never follow the palette lerp). */}
-      <pointLight
-        ref={(light) => {
-          if (light) light.color = palette3.accent;
-        }}
-        position={[0, 5, -13]}
-        intensity={9}
-        distance={22}
-      />
+      {!gameActive && (
+        <pointLight
+          ref={(light) => {
+            if (light) light.color = palette3.accent;
+          }}
+          position={[0, 5, -13]}
+          intensity={9}
+          distance={22}
+        />
+      )}
 
-      <NeuralCore quality={quality} />
+      {gameActive ? (
+        <GameScene />
+      ) : (
+        <>
+          <NeuralCore quality={quality} />
+          <ProjectMonuments />
+          <SkillConstellation />
+          <ArchiveRings />
+          <GridFloor />
+        </>
+      )}
+
       <ParticleField quality={quality} />
-      <ProjectMonuments />
-      <SkillConstellation />
-      <ArchiveRings />
-      <GridFloor />
     </>
   );
 }

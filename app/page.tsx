@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { MotionConfig } from "motion/react";
 import { Scene } from "./components/three/Scene";
 import { Hud } from "./components/hud/Hud";
@@ -17,6 +18,12 @@ import { useAppStore } from "./lib/store";
 export default function Home() {
   useScrollDriver();
   const webglFailed = useAppStore((s) => s.webglFailed);
+  const gameActive = useAppStore((s) => s.gameActive);
+  const loadHighScore = useAppStore((s) => s.loadHighScore);
+
+  useEffect(() => {
+    loadHighScore();
+  }, [loadHighScore]);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -24,7 +31,7 @@ export default function Home() {
           whileInView entrance animations (cards start at x: ±40). `clip`
           (not `hidden`) avoids making this a scroll container, so the
           fixed canvas/HUD and the smooth-scroll behavior are unaffected. */}
-      <div className="grain overflow-x-clip">
+      <div className={`grain overflow-x-clip ${gameActive ? "h-screen overflow-hidden" : ""}`}>
         <a
           href="#hero"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-background focus:px-4 focus:py-2 font-mono text-xs"
@@ -41,14 +48,16 @@ export default function Home() {
         <Cursor />
         <Hud />
 
-        <main className="relative z-10">
+        <main className={`relative z-10 transition-opacity duration-500 ${gameActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
           <Hero />
           <About />
           <Projects />
           <Skills />
           <Education />
         </main>
-        <Credits />
+        <div className={`transition-opacity duration-500 ${gameActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <Credits />
+        </div>
       </div>
     </MotionConfig>
   );

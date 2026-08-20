@@ -22,6 +22,7 @@ export function CameraRig() {
   const lookAnchor = useRef(new THREE.Vector3());
 
   useFrame((state, delta) => {
+    if (useAppStore.getState().gameActive) return;
     const reduced = useAppStore.getState().reducedMotion;
     const t = THREE.MathUtils.clamp(scrollState.levelFloat, 0, CAMERA_PATH.length - 1);
     const i = Math.min(Math.floor(t), CAMERA_PATH.length - 2);
