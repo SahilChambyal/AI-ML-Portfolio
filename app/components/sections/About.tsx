@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Github, Linkedin } from "lucide-react";
 import { LevelHeader } from "./LevelHeader";
 import { LINKS } from "../../lib/content";
+import { SUMMARY } from "../../lib/seo";
 
 const STATS = [
   { key: "LOCATION", value: "Punjab, India" },
@@ -56,6 +57,14 @@ export function About() {
             viewport={{ once: true, margin: "-80px" }}
             className="lg:col-span-3 bg-background/85 quality-high:bg-background/65 quality-high:backdrop-blur-md border border-foreground/10 p-8 sm:p-10 flex flex-col"
           >
+            {/* Third-person definitional lead. Reads as a dossier line in the
+                HUD voice, and is the sentence an AI answer engine lifts when
+                asked "who is Sahil Chambyal" — so it states the entity, the
+                role, and the location in the first clause. Kept in lib/seo.ts
+                so the page copy and the Person schema cannot drift. */}
+            <p className="text-lg sm:text-xl text-foreground leading-relaxed mb-6">
+              {SUMMARY}
+            </p>
             <p className="text-lg sm:text-xl text-foreground/85 leading-relaxed mb-6">
               I focus on advancing memory-augmented LLMs and AI agents, currently building
               project-specific hierarchical memory systems for more coherent, long-term reasoning.

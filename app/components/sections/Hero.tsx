@@ -32,24 +32,28 @@ export function Hero() {
       />
 
       <div className="relative max-w-5xl">
-        <motion.p
-          {...reveal(0.1)}
-          className="font-mono text-xs tracking-[0.3em] text-accent mb-8 flex items-center gap-3"
-        >
-          <span className="inline-block w-2 h-2 rotate-45 bg-accent" />
-          PLAYER ONE READY — AI/ML ENGINEER
-        </motion.p>
-
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-10">
-          <motion.span {...reveal(0.25)} className="block text-foreground">
-            BUILDING
+        {/* The eyebrow lives *inside* the h1 rather than above it: this is the
+            only H1 on the site, and a name query needs the name in it. Layout
+            is unchanged — it rendered in this position before. */}
+        <h1 className="mb-10">
+          <motion.span
+            {...reveal(0.1)}
+            className="font-mono text-xs tracking-[0.3em] text-accent mb-8 flex items-center gap-3"
+          >
+            <span aria-hidden="true" className="inline-block w-2 h-2 rotate-45 bg-accent" />
+            PLAYER ONE — SAHIL CHAMBYAL · AI/ML ENGINEER
           </motion.span>
-          <motion.span {...reveal(0.4)} className="block text-foreground/55">
-            INTELLIGENT SYSTEMS
-          </motion.span>
-          <motion.span {...reveal(0.55)} className="block text-foreground">
-            THAT MATTER<span className="text-accent">.</span>
-          </motion.span>
+          <span className="block text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+            <motion.span {...reveal(0.25)} className="block text-foreground">
+              BUILDING
+            </motion.span>
+            <motion.span {...reveal(0.4)} className="block text-foreground/55">
+              INTELLIGENT SYSTEMS
+            </motion.span>
+            <motion.span {...reveal(0.55)} className="block text-foreground">
+              THAT MATTER<span className="text-accent">.</span>
+            </motion.span>
+          </span>
         </h1>
 
         <motion.p {...reveal(0.75)} className="text-lg sm:text-xl text-foreground/75 max-w-xl leading-relaxed mb-12">
